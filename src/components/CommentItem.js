@@ -16,10 +16,10 @@ class CommentItem extends Component {
         const {text, username, profileImgUrl} = this.props
         return(
             <section data-test="component-comment-item">
-                <div class="media">
-                    <img data-test="comment-profile-img" src={profileImgUrl || defaultProfilePic} class="align-self-center mr-3" alt="..."/>
-                    <div class="media-body">
-                        <h5 class="mt-0">Title</h5>
+                <div className="media">
+                    <img data-test="comment-profile-img" src={profileImgUrl || defaultProfilePic} className="align-self-center mr-3" alt="..."/>
+                    <div className="media-body">
+                        <h5 className="mt-0">Title</h5>
                         <p data-test="comment-text">{text}</p>
                         <p data-test="comment-username">{username}</p>
                     </div>

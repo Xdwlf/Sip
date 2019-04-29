@@ -31,6 +31,10 @@ describe('', ()=>{
         const user = findByTestAttr(wrapper, "comment-username")
         expect(user.text()).toContain(defaultProps.username)
     })
+    test('renders an image', ()=>{
+        const img = findByTestAttr(wrapper, "comment-profile-img")
+        expect(img.html().length).not.toBe(0)
+    })
 })
 
 describe('when not given any props', ()=>{
@@ -45,5 +49,9 @@ describe('when not given any props', ()=>{
     test('renders a username', ()=>{
         const user = findByTestAttr(wrapper, "comment-username")
         expect(user.text()).toContain("Anonymous")
+    })
+    test('renders an image', ()=>{
+        const img = findByTestAttr(wrapper, "comment-profile-img")
+        expect(img.html().length).not.toBe(0)
     })
 })
