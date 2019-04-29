@@ -15,7 +15,7 @@ class CommentItem extends Component {
     render(){
         const {text, username, profileImgUrl} = this.props
         return(
-            <section data-test="component-comment-item">
+            <div data-test="component-comment-item">
                 <div className="media">
                     <img data-test="comment-profile-img" src={profileImgUrl || defaultProfilePic} className="align-self-center mr-3" alt="..."/>
                     <div className="media-body">
@@ -24,7 +24,7 @@ class CommentItem extends Component {
                         <p data-test="comment-username">{username}</p>
                     </div>
                 </div>
-            </section>
+            </div>
         )
     }
 }
