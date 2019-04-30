@@ -1,0 +1,43 @@
+$primary: rgba(230,230,230, 1);
+$primary-light: lighten($primary, 40%);
+$nav-height: 80px;
+
+
+html {
+    padding:0;
+    margin:0;
+}
+
+nav#nav-bar{
+    background-color: $primary-light;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+div#main{
+    display: grid;
+    height: 300vh;
+    width: 100%;
+    padding-left: 80px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    overflow-x: hidden;
+    div#sidebar{
+        padding-top: $nav-height;
+        background-color: $primary;
+        grid-row: 1/-1;
+        overflow: hidden;
+        position: fixed;
+        left: 0;
+        height: 100%;
+        width: 80px;
+    }
+    div#content{
+        padding-top: $nav-height;
+        background-color: white;
+        overflow-x: hidden;
+    }
+}
