@@ -44,7 +44,7 @@ export function externalApiCall(type, data){
             method: 'get',
             url: externalApi + externalApiCommands[type] + (data?data:"")
         }).then(res=> {
-            return resolve(res)
+            return resolve(res.data.drinks)
         }).catch(err =>{
             return reject(err)
         })
