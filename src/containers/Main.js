@@ -4,6 +4,7 @@ import SearchPage from './SearchPage'
 import Homepage from "./Homepage"
 import SideBar from './SideBar'
 import NotFound from "../components/NotFound"
+import DrinkItem from "../components/DrinkItem"
 
 class Main extends Component{
     render(){
@@ -16,6 +17,7 @@ class Main extends Component{
                     <Switch>
                         <Route exact path="/" component={Homepage}/>
                         <Route exact path="/search" component={SearchPage}/>
+                        <Route path="/drinks/:drinkId" component={DrinkItem} />
                         <Route component={NotFound} />
                     </Switch>
                 </div>

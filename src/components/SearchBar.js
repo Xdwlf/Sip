@@ -9,6 +9,8 @@ class SearchBar extends Component{
     }
     handleSubmit = (e) => {
         e.preventDefault()
+        this.props.fetchDrinks("name", this.state.query)
+        this.setState({query: ""})
     }
 
     handleChange = (e) => {
