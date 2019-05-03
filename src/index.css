@@ -50,4 +50,19 @@ div#main div#content div#drink-list {
       grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.5rem;
 }
+
+div#main form#auth-form {
+  margin: 2rem auto;
+  width: 40%;
+  min-width: 400px;
+  text-align: start;
+}
+
+div#main form#auth-form h4 {
+  padding: 8px 0;
+}
+
+div#main form#auth-form button {
+  margin: 20px 0;
+}
 /*# sourceMappingURL=index.css.map */

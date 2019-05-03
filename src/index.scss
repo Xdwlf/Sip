@@ -47,4 +47,16 @@ div#main{
             grid-gap: 1.5rem;
         }
     }
+    form#auth-form{
+        margin: 2rem auto;
+        width: 40%;
+        min-width: 400px;
+        text-align: start;
+        h4{
+            padding: 8px 0;
+        }
+        button{
+            margin: 20px 0;
+        }
+    }
 }
