@@ -16,7 +16,9 @@ class AuthForm extends Component{
     }
 
     handleSubmit = (e)=>{
+        const {submitAction} = this.props
         e.preventDefault();
+        submitAction(this.state)
     }
 
     render(){

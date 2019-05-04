@@ -1,21 +1,20 @@
 import axios from 'axios';
 
-export function setHeader(token){
-    if(token){
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    } else {
-        delete axios.defaults.headers.common["Authorization"];
+export function axiosTokenHeader(token){
+    return {
+        'Authorization': `Bearer ${token}`
     }
 }
 
 const server = "http://localhost:8081/api/"
 const externalApi = "https://www.thecocktaildb.com/api/json/v1/1/";
 
-export function internalServerCall(method, path, data){
+export function internalServerCall(method, path, data, header){
     return new Promise((resolve, reject)=>{
         return axios({
             method: method.toLowerCase(),
             url: server + path,
+            headers: header,
             data
         }).then(res=>{
             return resolve(res)

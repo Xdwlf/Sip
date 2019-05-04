@@ -1,11 +1,11 @@
 import {SET_CURRENT_USER, LOGOUT_USER} from '../actionTypes'
 
-function currentUser(state= null, action){
+function currentUser(state= {}, action){
     switch(action.type){
         case SET_CURRENT_USER:
-            return {...state, currentUser: action.user}
+            return {...action.user}
         case LOGOUT_USER:
-            return {...state, currentUser:null}
+            return {}
         default:
             return state;
     }
