@@ -3,9 +3,9 @@ import {SET_ERROR, REMOVE_ERROR} from '../actionTypes'
 function error(state=null, action){
     switch(action.type){
         case SET_ERROR:
-            return {...state, error: action.error};
+            return action.error;
         case REMOVE_ERROR:
-            return {...state, error: null}
+            return null;
         default:
             return state;
     }

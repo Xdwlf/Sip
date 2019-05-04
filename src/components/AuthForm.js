@@ -15,10 +15,13 @@ class AuthForm extends Component{
         this.setState({[e.target.name]: e.target.value})
     }
 
-    handleSubmit = (e)=>{
-        const {submitAction} = this.props
+    handleSubmit= (e) =>{
+        const {submitAction, history} = this.props
         e.preventDefault();
-        submitAction(this.state)
+        submitAction(this.state).then(res=> 
+            history.push('/')
+            ).catch(err=> console.log(err));
+
     }
 
     render(){
