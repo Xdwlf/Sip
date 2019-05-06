@@ -43,7 +43,6 @@ class DrinkItem extends Component{
         return new Promise((resolve, reject)=>{
             const {drinkId} = this.props.match.params
             const {currentUser} = this.props
-            console.log(currentUser)
             const comment = {
                 ...commentData,
                 user: currentUser.id,
@@ -52,7 +51,62 @@ class DrinkItem extends Component{
             internalServerCall('post', `drinks/${drinkId}/comments`, comment, axiosTokenHeader(localStorage.jwtToken))
                 .then(res => {
                     let newComment = res.data;
+                    const comments = [newComment, ...this.state.comments]
+                    this.setState({comments})
                     resolve(newComment)
+                })
+                .catch(err=> {
+                    const {setError} = this.props
+                    setError(err.response.data.error.message)
+                    reject()
+                })
+        })
+    }
+
+    editComment = (commentData) => {
+        return new Promise((resolve, reject)=>{
+            const {drinkId} = this.props.match.params
+            const {currentUser} = this.props
+            const {id, text, rating} = commentData
+            const comment = {
+                text, 
+                rating,
+                user: currentUser.id,
+                drinkId
+            }
+            internalServerCall('put', `drinks/${drinkId}/comments/${id}`, comment, axiosTokenHeader(localStorage.jwtToken))
+                .then(res => {
+                    let editedComment = res.data;
+                    this.setState((state)=> {
+                        const comments = state.comments.map((c)=> (c._id===editedComment._id)? 
+                            editedComment: c)
+                        return {comments}
+                    })
+                    resolve(editedComment)
+                })
+                .catch(err=> {
+                    const {setError} = this.props
+                    setError(err.response.data.error.message)
+                    reject()
+                })
+        })
+    }
+
+    deleteComment = (id) => {
+        return new Promise((resolve, reject)=>{
+            const {drinkId} = this.props.match.params
+            const {currentUser} = this.props
+            const comment = {
+                user: currentUser.id
+            }
+            internalServerCall('delete', `drinks/${drinkId}/comments/${id}`, comment, axiosTokenHeader(localStorage.jwtToken))
+                .then(res => {
+                    let deleted = res.data;
+                    this.setState((state)=> {
+                        const comments = state.comments.filter((c)=> c._id!== deleted._id)
+                        return {comments}
+                    })
+                    resolve(deleted)
                 })
                 .catch(err=> {
                     const {setError} = this.props
@@ -64,30 +118,31 @@ class DrinkItem extends Component{
 
 
     render(){
-        const {drinkId} = this.props.match.params
         const {drink, comments} = this.state
         const item = drink? (
             <div>
                 <div>
-                <img src={drink.strDrinkThumb} alt={"image of " + drink.strDrink}/>
-                <div>
-                    <h2>
-                        {drink.strDrink}
-                    </h2>
-                    <h4>{drink.strAlcoholic}</h4>
-                    <p>Best served in a {drink.strGlass}</p>
-                    <p></p>
-                </div>
-                <ShowHidePackage text="Ingredients">
-                    <IngredientList drink={drink} />
-                </ ShowHidePackage>
-                <ShowHidePackage text="Instructions">
-                    <Instructions drink={drink} />
-                </ShowHidePackage>
+                    <img src={drink.strDrinkThumb} alt={"image of " + drink.strDrink}/>
+                    <div>
+                        <h2>
+                            {drink.strDrink}
+                        </h2>
+                        <h4>{drink.strAlcoholic}</h4>
+                        <p>Best served in a {drink.strGlass}</p>
+                        <p></p>
+                    </div>
+                    <ShowHidePackage text="Ingredients">
+                        <IngredientList drink={drink} />
+                    </ ShowHidePackage>
+                    <ShowHidePackage text="Instructions">
+                        <Instructions drink={drink} />
+                    </ShowHidePackage>
                 </div>
                 <div>
                     <CommentList comments={comments} 
                         addNewComment={this.addNewComment}
+                        editComment={this.editComment}
+                        deleteComment={this.deleteComment}
                         currentUser={this.props.currentUser}
                         />
                 </div>

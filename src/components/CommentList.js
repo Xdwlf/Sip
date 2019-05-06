@@ -25,17 +25,19 @@ class CommentList extends Component{
     }
 
     handleClick = ()=>{
-        this.setState({clicked: true})
+        this.setState({clicked: !this.state.clicked})
     }
 
     render(){
-        const {comments, addNewComment} = this.props
+        const {comments, addNewComment, editComment, deleteComment} = this.props
         const shownComments = comments.map(c=>(
             <div key={c._id}>
                 <CommentItem text={c.text} 
                     user={c.user}
                     rating={c.rating}
                     id={c._id}
+                    editComment={editComment}
+                    deleteComment={deleteComment}
                     />
             </div>
         ))
@@ -46,7 +48,8 @@ class CommentList extends Component{
                     <button onClick={this.handleClick}>Add A New Comment</button>
                 </div>
                 <hr/>
-                {this.state.clicked && <CommentForm addNewComment={addNewComment}  />}
+                {this.state.clicked && <CommentForm addNewComment={addNewComment}
+                                                    toggleForm={this.handleClick}  />}
                 {shownComments}
             </div>
         )

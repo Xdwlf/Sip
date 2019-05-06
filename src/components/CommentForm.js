@@ -7,15 +7,28 @@ class CommentForm extends Component {
             text: "",
             rating: 5
         }
+        this.handleSubmit= this.handleSubmit.bind(this)
     }
-    handleSubmit=(e) =>{
-        const {addNewComment} = this.props
-        const newComment ={...this.state}
-        addNewComment(newComment)
-        e.preventDefault();
+    componentWillMount(){
+        const {values} = this.props
+        if(values) {
+            this.setState(values)
+        }
+    }
 
-        
+    async handleSubmit(e){
+        e.preventDefault();
+        const {addNewComment, editComment, toggleEdit, toggleForm, id} = this.props
+        const newComment ={...this.state}
+        if(this.props.values){
+            await editComment({id, ...this.state})
+            toggleEdit()
+        } else {
+            addNewComment(newComment)
+            toggleForm()
+        }
     }
+
     handleChange= (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -44,7 +57,11 @@ class CommentForm extends Component {
                                 />
                         </div>
                     </div>
-                    <button className="btn btn-outline-success btn-block" type="submit">Submit Comment</button>
+                    {(this.props.values)? (
+                        <button className="btn btn-outline-success btn-block" type="submit">Edit Comment</button>
+                    ): (
+                        <button className="btn btn-outline-success btn-block" type="submit">Submit Comment</button>
+                    )}
                 </form>
             </div>
         )
