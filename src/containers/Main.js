@@ -23,7 +23,7 @@ class Main extends Component{
         return (
             <div id="main">
                 <div id="sidebar">
-                    <SideBar />
+                    <SideBar history={history} />
                 </div>
                 <div id="content">
                     <PopUp type="notification" text={notification} removePopUp={removeNotification} />

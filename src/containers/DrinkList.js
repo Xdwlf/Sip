@@ -38,6 +38,12 @@ class DrinkList extends Component{
                 </div>
             </Link>
         ))
+        let tabs = []
+        const numPages = Math.floor(drinks.length/20) + 1; 
+        for(let i= 1; i<= numPages; i++){
+            tabs.push(<div>{i}</div>)
+        }
+        
         return (
             <section>
                 <h1>Drinks</h1>
@@ -46,7 +52,7 @@ class DrinkList extends Component{
                                 {drinks}
                             </div>
                         ): "No Beverages Found" }
-
+                <div>{tabs}</div>
             </section>
         )
     }
