@@ -5,23 +5,29 @@ import defaultProfilePic from '../images/defaultProfilePic.png'
 class CommentItem extends Component {
     static propTypes = {
         text: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired,
-        profileImgUrl: PropTypes.string
+        user: PropTypes.shape({
+            username: PropTypes.string.isRequired,
+            profileImgUrl: PropTypes.string,
+            _id: PropTypes.string.isRequired
+        }),
+        profileImgUrl: PropTypes.string,
+        rating: PropTypes.number
     }
     static defaultProps = {
         text: "Filler Text",
         username: "Anonymous"
     }
     render(){
-        const {text, username, profileImgUrl} = this.props
+        const {text, user, rating} = this.props
         return(
             <div data-test="component-comment-item">
                 <div className="media">
-                    <img data-test="comment-profile-img" src={profileImgUrl || defaultProfilePic} className="align-self-center mr-3" alt="..."/>
+                    <img data-test="comment-profile-img" src={(user && user.profileImgUrl) || defaultProfilePic} className="align-self-center mr-3" alt="..."/>
                     <div className="media-body">
                         <h5 className="mt-0">Title</h5>
                         <p data-test="comment-text">{text}</p>
-                        <p data-test="comment-username">{username}</p>
+                        <p data-test="comment-rating">{rating}</p>
+                        <p data-test="comment-username">{user.username}</p>
                     </div>
                 </div>
             </div>

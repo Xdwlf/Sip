@@ -6,10 +6,11 @@ import Homepage from "./Homepage"
 import SideBar from './SideBar'
 import AuthForm from "../components/AuthForm"
 import NotFound from "../components/NotFound"
-import DrinkItem from "../components/DrinkItem"
+import DrinkItem from "./DrinkItem"
 import PopUp from "../components/PopUp"
 import {signupUser, signinUser} from '../store/actions/auth'
 import {removeNotification} from '../store/actions/notifications'
+import {loadComments} from "../store/actions/comments"
 import {removeError} from '../store/actions/errors'
 
 
@@ -65,4 +66,4 @@ function mapStateToProps(state){
     }
 }
 
-export default withRouter(connect(mapStateToProps, {signupUser, signinUser, removeNotification, removeError})(Main))
+export default withRouter(connect(mapStateToProps, {signupUser, signinUser, removeNotification, removeError, loadComments})(Main))
